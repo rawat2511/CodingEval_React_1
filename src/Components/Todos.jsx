@@ -1,19 +1,15 @@
 import React from 'react';
-import styles from './todos.module.css';
-import {v4 as uuid} from 'uuid';
+import Item from './Item';
 
-export const Todos = ({todos}) => {
+export const Todos = ({todos, changeStatus, showCompleted}) => {
 
-    console.log('todos = ', todos );
+  console.log('todos = ', todos );
+
   return (
   <div>
       {
-          todos.map(({input, completed}) => 
-            <div key={uuid()} className={styles.divInput}>
-            <input type="checkbox" />
-            <label>{input}</label>
-            </div>
-          )
+          todos.filter(({completed}) => completed.toString() === showCompleted).
+          map(({input, completed, id}) => <Item id={id} key={id} input={input} completed={completed} changeStatus={changeStatus} />)
       }
       
   </div>
